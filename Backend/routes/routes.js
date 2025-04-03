@@ -4,6 +4,9 @@ const {
     createBill,
 } = require ("../controllers/controllers")
 
-router.post("/customers/:id/paybill", createBill)
+router.post("/customers/:id/paybill", async (req, res) => {
+    req.body.customer_id = req.params.id;
+    createBill(req, res);
+});
 
 module.exports = router
