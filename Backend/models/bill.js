@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const billSchema = new Schema({
-    mongo_customer_id: { 
+    customer_id: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: "customer",
         required: true
@@ -19,8 +19,9 @@ const billSchema = new Schema({
     payment_date: {
         type: Date,
         required: true,
+        default: Date.now,
     },
 }, {timestamps: true})
 
-module.exports = mongoose.model('bill', billSchema);
+module.exports = mongoose.model('bills', billSchema);
 
