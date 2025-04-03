@@ -4,6 +4,11 @@ const {
     getBill,
     createBill,
 } = require ("../controllers/controllers")
+const {
+    register
+} = require('../controllers/Customercontrollers')
+
+router.post("/new", register)
 
 router.get("/customers/:id/bill", getBill)
 
