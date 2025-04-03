@@ -5,10 +5,12 @@ const {
     createBill,
 } = require ("../controllers/controllers")
 const {
-    register
+    register,
+    updateCustomer
 } = require('../controllers/Customercontrollers')
 
 router.post("/new", register)
+router.put("/:id/update", updateCustomer);
 
 router.get("/customers/:id/bill", getBill)
 

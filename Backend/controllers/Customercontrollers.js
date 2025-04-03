@@ -13,6 +13,36 @@ const register = async (req, res) => {
     }
 };
 
+
+const updateCustomer = async (req, res) => {
+    const { id } = req.params;  // Get customer ID from URL
+    const { new_address, new_phone_number, new_email } = req.body;  // Get new details from request body
+
+    try {
+        // Find and update the customer
+        const updatedCustomer = await Customer.findByIdAndUpdate(
+            id,
+            { 
+                address: new_address, 
+                PhoneNumber: new_phone_number, 
+                email: new_email 
+            },
+            { new: true, runValidators: true } // Return updated customer & validate new data
+        );
+
+        if (!updatedCustomer) {
+            return res.status(404).json({ error: "Customer not found" });
+        }
+
+        res.status(200).json(updatedCustomer);
+    } catch (error) {
+        console.error("❌ ERROR updating customer:", error);
+        res.status(500).json({ error: error.message || "Internal Server Error" });
+    }
+};
+
+
 module.exports = {
-    register
+    register,
+    updateCustomer
 };
